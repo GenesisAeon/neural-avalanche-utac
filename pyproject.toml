@@ -95,3 +95,7 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "neural_avalanche_utac.cli"
 disallow_untyped_decorators = false
+
+[[tool.mypy.overrides]]
+module = "neural_avalanche_utac.spike_train"
+disable_error_code = ["arg-type"]
