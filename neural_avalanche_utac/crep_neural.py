@@ -21,7 +21,7 @@ import numpy as np
 
 from neural_avalanche_utac.avalanche import AvalancheDetector
 from neural_avalanche_utac.branching import BranchingRatioEstimator
-from neural_avalanche_utac.constants import K, SIGMA_CREP
+from neural_avalanche_utac.constants import SIGMA_CREP, K
 from neural_avalanche_utac.power_law import PowerLawFitter
 
 

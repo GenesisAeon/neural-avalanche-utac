@@ -1,8 +1,8 @@
-site_name: Diamond Setup
-site_description: Universal Python project scaffold — generate professional project skeletons in seconds
-site_author: GenesisAeon
-repo_url: https://github.com/GenesisAeon/diamond-setup
-repo_name: GenesisAeon/diamond-setup
+site_name: neural-avalanche-utac
+site_description: "GenesisAeon Package 20 — Brain Criticality & Neuronal Avalanche Threshold"
+site_author: Johann Römer / MOR Research Collective
+repo_url: https://github.com/GenesisAeon/neural-avalanche-utac
+repo_name: GenesisAeon/neural-avalanche-utac
 
 theme:
   name: material
@@ -39,5 +39,5 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - CLI Reference: cli.md
-  - Templates: templates.md
+  - API Reference: api.md
+  - Science: science.md

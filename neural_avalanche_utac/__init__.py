@@ -17,8 +17,8 @@ __version__ = "0.1.0"
 __author__ = "Johann Römer / MOR Research Collective"
 __license__ = "MIT"
 
-from neural_avalanche_utac.system import NeuralAvalancheUTAC
 from neural_avalanche_utac.constants import GAMMA_BRAIN, NEURAL_TARGETS, PACKAGE_REGISTRY_ENTRY
+from neural_avalanche_utac.system import NeuralAvalancheUTAC
 
 __all__ = [
     "NeuralAvalancheUTAC",

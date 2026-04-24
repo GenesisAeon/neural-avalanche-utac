@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import numpy as np
-import pytest
 
-from neural_avalanche_utac.avalanche import Avalanche, AvalancheDetector
+from neural_avalanche_utac.avalanche import AvalancheDetector
 
 
 def _make_spikes(pattern: list[int], n_neurons: int = 10) -> np.ndarray:
