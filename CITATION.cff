@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "neural-avalanche-utac: Brain Criticality & Neuronal Avalanche Threshold"
+version: 0.1.0
+date-released: "2026-04-24"
+license: MIT
+authors:
+  - family-names: Römer
+    given-names: Johann
+    affiliation: MOR Research Collective
+repository-code: "https://github.com/GenesisAeon/neural-avalanche-utac"
+doi: 10.5281/zenodo.19645351
+abstract: >
+  GenesisAeon Package 20. Models neuronal avalanches in the brain at
+  criticality as a UTAC dynamical system. Central result: Γ_brain ≈ 0.251 =
+  Γ_AMOC — cross-domain CREP universality at the η = 50% homeostatic setpoint.
+keywords:
+  - neuronal avalanches
+  - brain criticality
+  - self-organised criticality
+  - UTAC
+  - CREP tensor
+  - branching process
+  - GenesisAeon
+references:
+  - type: article
+    title: "Is criticality a unified setpoint of brain function?"
+    authors:
+      - family-names: Hengen
+        given-names: K.B.
+      - family-names: Shew
+        given-names: W.L.
+    journal: Neuron
+    volume: 113
+    issue: 16
+    pages: 2582-2598
+    year: 2025
+    doi: 10.1016/j.neuron.2025.05.020
+  - type: article
+    title: "Critical Avalanches in E-I Balanced Networks"
+    journal: Physical Review Letters
+    volume: 134
+    pages: "028401"
+    year: 2025
+    doi: 10.1103/PhysRevLett.134.028401
