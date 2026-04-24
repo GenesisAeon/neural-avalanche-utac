@@ -56,7 +56,9 @@ def run(
 
     univ = model.gamma_universality_check()
     if univ["universality_confirmed"]:
-        console.print("[green]✓ Γ_brain ≈ Γ_AMOC ≈ 0.251 — cross-domain universality confirmed[/green]")
+        console.print(
+            "[green]✓ Γ_brain ≈ Γ_AMOC ≈ 0.251 — cross-domain universality confirmed[/green]"
+        )
     else:
         console.print(f"[yellow]Γ_brain = {univ['gamma_brain_measured']:.3f}  "
                       f"Γ_AMOC = {univ['gamma_amoc']:.3f}  (more data needed)[/yellow]")
@@ -103,7 +105,6 @@ def gamma_universality(
     seed: int = typer.Option(42, help="Random seed"),
 ) -> None:
     """Compute Γ_brain and compare with Γ_AMOC (cross-domain universality check)."""
-    from neural_avalanche_utac.constants import CREP_SPECTRUM
     from neural_avalanche_utac.system import NeuralAvalancheUTAC
 
     model = NeuralAvalancheUTAC(n_neurons=neurons, seed=seed)

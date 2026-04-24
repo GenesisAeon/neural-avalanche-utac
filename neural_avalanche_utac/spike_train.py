@@ -7,7 +7,7 @@ the avalanche size distribution follows P(S) ~ S^(-3/2).
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
@@ -122,7 +122,7 @@ class SpikeTrainLoader:
         labels = ["subcritical", "critical", "supercritical"]
         all_data: dict = {"dt_ms": np.array([2.0])}
 
-        for cfg, label in zip(configs, labels):
+        for cfg, label in zip(configs, labels, strict=False):
             gen = SpikeTrainGenerator(cfg)
             result = gen.generate()
             all_data[f"spikes_{label}"] = result["spikes"]

@@ -13,23 +13,24 @@ Core imports stub (genesis-os not required):
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import importlib.util
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any
 
 import numpy as np
 
-from neural_avalanche_utac.branching import BranchingRatioEstimator
 from neural_avalanche_utac.avalanche import AvalancheDetector
+from neural_avalanche_utac.branching import BranchingRatioEstimator
 from neural_avalanche_utac.constants import (
-    GAMMA_BRAIN,
     GAMMA_AMOC,
+    GAMMA_BRAIN,
     H_STAR,
-    K,
     PACKAGE_REGISTRY_ENTRY,
     R_HOMEOSTATIC,
     SEED,
     SIGMA_CREP,
+    K,
 )
 from neural_avalanche_utac.crep_neural import NeuralCREPTensor
 from neural_avalanche_utac.ei_balance import EIBalanceMonitor
@@ -37,15 +38,7 @@ from neural_avalanche_utac.homeostasis import HomeostaticPlasticity
 from neural_avalanche_utac.spike_train import SpikeTrainConfig, SpikeTrainGenerator
 
 # ── genesis-os stub ────────────────────────────────────────────────────────────
-try:
-    from genesis.core.utac import UTAC_ODE, UTACParams  # type: ignore[import]
-    from genesis.core.crep import CREPTensor  # type: ignore[import]
-    from genesis.mirror.phase_loop import PhaseTransitionLoop  # type: ignore[import]
-    from genesis.core.lagrangian import UnifiedLagrangian  # type: ignore[import]
-
-    GENESIS_OS_AVAILABLE = True
-except ImportError:
-    GENESIS_OS_AVAILABLE = False
+GENESIS_OS_AVAILABLE = importlib.util.find_spec("genesis") is not None
 
 
 # ── Ethics-Gate Light (Phase H) ───────────────────────────────────────────────
@@ -271,7 +264,7 @@ class NeuralAvalancheUTAC:
         """Return CREP tensor components {C, R, E, P, Gamma}."""
         if not self._crep_state:
             return {"C": 0.0, "R": 0.0, "E": 0.0, "P": 0.0, "Gamma": 0.0, "sigma_b": 0.0}
-        return {k: v for k, v in self._crep_state.items()}
+        return dict(self._crep_state)
 
     def get_utac_state(self) -> dict:
         """Return UTAC state variables {H, dH_dt, H_star, K_eff}."""

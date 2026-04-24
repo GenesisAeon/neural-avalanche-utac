@@ -69,13 +69,17 @@ class AvalancheDetector:
                 size += int(population[t])
                 duration += 1
             elif not is_active and in_av:
-                avalanches.append(Avalanche(size=size, duration=duration, start_bin=start, end_bin=t - 1))
+                avalanches.append(
+                    Avalanche(size=size, duration=duration, start_bin=start, end_bin=t - 1)
+                )
                 in_av = False
                 size = 0
                 duration = 0
 
         if in_av:
-            avalanches.append(Avalanche(size=size, duration=duration, start_bin=start, end_bin=len(active) - 1))
+            avalanches.append(
+                Avalanche(size=size, duration=duration, start_bin=start, end_bin=len(active) - 1)
+            )
 
         return avalanches
 

@@ -40,7 +40,10 @@ class PowerLawFitter:
         x = data[data >= self.x_min]
         n = len(x)
         if n < 2:
-            return {"tau": float("nan"), "x_min": self.x_min, "n_tail": n, "log_likelihood": float("nan")}
+            return {
+                "tau": float("nan"), "x_min": self.x_min,
+                "n_tail": n, "log_likelihood": float("nan"),
+            }
 
         # Discrete Hill MLE estimator
         log_ratio = np.log(x / (self.x_min - 0.5))
@@ -70,7 +73,9 @@ class PowerLawFitter:
         p_value = float(np.exp(-2.0 * n * D**2))
         return {"D": D, "p_value": p_value}
 
-    def tau_proximity(self, tau_measured: float, tau_critical: float = 1.5, width: float = 0.15) -> float:
+    def tau_proximity(
+        self, tau_measured: float, tau_critical: float = 1.5, width: float = 0.15
+    ) -> float:
         """
         Gaussian proximity of measured exponent to the critical value.
 
