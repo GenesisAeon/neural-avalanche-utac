@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -45,7 +46,7 @@ class SpikeTrainGenerator:
         self.config = config or SpikeTrainConfig()
         self.rng = np.random.default_rng(self.config.seed)
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, Any]:
         """
         Generate a spike train via branching process simulation.
 
@@ -97,17 +98,17 @@ class SpikeTrainLoader:
     """Load/save/generate spike train data in .npz format."""
 
     @staticmethod
-    def save(path: str | Path, data: dict) -> None:
+    def save(path: str | Path, data: dict[str, Any]) -> None:
         arrays = {k: v for k, v in data.items() if isinstance(v, np.ndarray)}
         np.savez_compressed(str(path), **arrays)
 
     @staticmethod
-    def load(path: str | Path) -> dict:
+    def load(path: str | Path) -> dict[str, Any]:
         npz = np.load(str(path))
         return dict(npz)
 
     @staticmethod
-    def generate_synthetic(path: str | Path, seed: int = 42) -> dict:
+    def generate_synthetic(path: str | Path, seed: int = 42) -> dict[str, Any]:
         """
         Generate and save synthetic spike trains at three branching ratios:
           subcritical (σ_b=0.7), critical (σ_b=1.0), supercritical (σ_b=1.3).
@@ -120,7 +121,7 @@ class SpikeTrainLoader:
             SpikeTrainConfig(n_neurons=200, duration_s=120.0, branching_ratio=1.3, seed=seed + 2),
         ]
         labels = ["subcritical", "critical", "supercritical"]
-        all_data: dict = {"dt_ms": np.array([2.0])}
+        all_data: dict[str, Any] = {"dt_ms": np.array([2.0])}
 
         for cfg, label in zip(configs, labels, strict=False):
             gen = SpikeTrainGenerator(cfg)

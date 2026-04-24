@@ -146,9 +146,9 @@ class NeuralAvalancheUTAC:
 
         # State
         self._utac: UTACState = UTACState()
-        self._crep_state: dict = {}
-        self._phase_events: list[dict] = []
-        self._cycle_log: list[dict] = []
+        self._crep_state: dict[str, Any] = {}
+        self._phase_events: list[dict[str, Any]] = []
+        self._cycle_log: list[dict[str, Any]] = []
 
     # ── Internal UTAC ODE ─────────────────────────────────────────────────────
 
@@ -175,11 +175,11 @@ class NeuralAvalancheUTAC:
             branching_ratio=float(np.clip(sigma_b, 0.05, 1.95)),
             seed=int(self._rng.integers(0, 2**31)),
         )
-        return SpikeTrainGenerator(cfg).generate()["spikes"]
+        return np.asarray(SpikeTrainGenerator(cfg).generate()["spikes"])
 
     # ── Diamond interface ─────────────────────────────────────────────────────
 
-    def run_cycle(self, duration_seconds: float = 3600.0) -> dict:
+    def run_cycle(self, duration_seconds: float = 3600.0) -> dict[str, Any]:
         """
         Run one full UTAC cycle and return a comprehensive state dictionary.
 
@@ -244,7 +244,7 @@ class NeuralAvalancheUTAC:
         self._utac.H = H
         self._crep_state = crep_out  # last segment's CREP state
 
-        result: dict = {
+        result: dict[str, Any] = {
             "H_final": H,
             "sigma_b_mean": float(np.mean(sigma_history)),
             "gamma_mean": float(np.mean(gamma_history)),
@@ -260,13 +260,13 @@ class NeuralAvalancheUTAC:
         self._cycle_log.append(result)
         return result
 
-    def get_crep_state(self) -> dict:
+    def get_crep_state(self) -> dict[str, Any]:
         """Return CREP tensor components {C, R, E, P, Gamma}."""
         if not self._crep_state:
             return {"C": 0.0, "R": 0.0, "E": 0.0, "P": 0.0, "Gamma": 0.0, "sigma_b": 0.0}
         return dict(self._crep_state)
 
-    def get_utac_state(self) -> dict:
+    def get_utac_state(self) -> dict[str, Any]:
         """Return UTAC state variables {H, dH_dt, H_star, K_eff}."""
         return {
             "H": float(self._utac.H),
@@ -275,11 +275,11 @@ class NeuralAvalancheUTAC:
             "K_eff": float(self._utac.K_eff),
         }
 
-    def get_phase_events(self) -> list[dict]:
+    def get_phase_events(self) -> list[dict[str, Any]]:
         """Return list of phase transition events (avalanche cluster records)."""
         return list(self._phase_events)
 
-    def to_zenodo_record(self) -> dict:
+    def to_zenodo_record(self) -> dict[str, Any]:
         """
         Generate a Zenodo-compatible metadata record.
 
@@ -340,7 +340,7 @@ class NeuralAvalancheUTAC:
         """True if current branching ratio is within 5% of σ_b = 1."""
         return abs(self._utac.H - H_STAR) / H_STAR < 0.05
 
-    def gamma_universality_check(self) -> dict:
+    def gamma_universality_check(self) -> dict[str, Any]:
         """
         THE KEY RESULT: verify Γ_brain ≈ Γ_AMOC ≈ 0.251.
 

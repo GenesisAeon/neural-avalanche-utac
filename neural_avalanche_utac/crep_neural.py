@@ -16,6 +16,7 @@ with 1 indicating optimal proximity to the critical state.
 from __future__ import annotations
 
 from math import factorial
+from typing import Any
 
 import numpy as np
 
@@ -40,7 +41,7 @@ class NeuralCREPTensor:
         self._branching = BranchingRatioEstimator()
         self._pl_fitter = PowerLawFitter(x_min=1.0)
         self._av_det = AvalancheDetector()
-        self._last: dict = {}
+        self._last: dict[str, Any] = {}
 
     # ── CREP components ────────────────────────────────────────────────────────
 
@@ -104,7 +105,7 @@ class NeuralCREPTensor:
             return 0.0
 
         n_patterns = factorial(order)
-        pattern_counts: dict[tuple, int] = {}
+        pattern_counts: dict[tuple[int, ...], int] = {}
 
         for i in range(len(n_t) - order):
             seg = n_t[i : i + order]
@@ -122,7 +123,7 @@ class NeuralCREPTensor:
 
     # ── Main computation ───────────────────────────────────────────────────────
 
-    def compute(self, spikes: np.ndarray) -> dict:
+    def compute(self, spikes: np.ndarray) -> dict[str, Any]:
         """
         Compute the full CREP tensor from spike array (n_neurons, n_bins).
 

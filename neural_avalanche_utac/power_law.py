@@ -7,6 +7,8 @@ or α = 2 (duration) maps to the CREP R-component.
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 
 
@@ -25,7 +27,7 @@ class PowerLawFitter:
     def __init__(self, x_min: float = 1.0) -> None:
         self.x_min = x_min
 
-    def fit_mle(self, data: np.ndarray) -> dict:
+    def fit_mle(self, data: np.ndarray) -> dict[str, Any]:
         """
         Fit power-law exponent τ via MLE.
 
@@ -54,7 +56,7 @@ class PowerLawFitter:
 
         return {"tau": tau, "x_min": self.x_min, "n_tail": n, "log_likelihood": ll}
 
-    def ks_distance(self, data: np.ndarray, tau: float) -> dict:
+    def ks_distance(self, data: np.ndarray, tau: float) -> dict[str, Any]:
         """
         Kolmogorov-Smirnov distance between empirical CDF and fitted power-law.
 
@@ -100,7 +102,7 @@ class PowerLawFitter:
         self,
         data: np.ndarray,
         tau_critical: float = 1.5,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Convenience: fit + KS test + proximity score in one call."""
         fit = self.fit_mle(data)
         tau = fit["tau"]

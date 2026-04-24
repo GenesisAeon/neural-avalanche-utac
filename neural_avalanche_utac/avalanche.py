@@ -9,6 +9,7 @@ At criticality: P(S) ~ S^(-3/2), P(D) ~ D^(-2)  (mean-field branching process).
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
 import numpy as np
 
@@ -91,7 +92,7 @@ class AvalancheDetector:
         """Return array of avalanche durations."""
         return np.array([a.duration for a in avalanches], dtype=float)
 
-    def summary(self, avalanches: list[Avalanche]) -> dict:
+    def summary(self, avalanches: list[Avalanche]) -> dict[str, Any]:
         """Return descriptive statistics for detected avalanches."""
         if not avalanches:
             return {"n": 0, "mean_size": float("nan"), "mean_duration": float("nan"),

@@ -1,5 +1,9 @@
 """Physical constants and benchmark targets for neural-avalanche-utac (Package 20)."""
 
+from __future__ import annotations
+
+from typing import Any
+
 # Global seed (GenesisAeon standard)
 SEED: int = 42
 
@@ -28,7 +32,7 @@ ALPHA_DURATION_CRITICAL: float = 2.0  # avalanche duration exponent P(D) ~ D^(-�
 BRANCHING_RATIO_CRITICAL: float = 1.0  # σ_b = 1 at criticality
 
 # ── Benchmark targets (Hengen & Shew 2025 + Phys Rev Lett 2025) ───────────────
-NEURAL_TARGETS: dict = {
+NEURAL_TARGETS: dict[str, Any] = {
     # (target_value, fractional_tolerance)
     "branching_ratio_critical": (1.0,  0.05),   # σ_b = 1 ± 5%
     "power_law_tau":            (1.5,  0.05),   # size exponent ± 0.05 absolute
@@ -40,7 +44,7 @@ NEURAL_TARGETS: dict = {
 }
 
 # ── Genesis-OS package registry entry ─────────────────────────────────────────
-PACKAGE_REGISTRY_ENTRY: dict = {
+PACKAGE_REGISTRY_ENTRY: dict[str, Any] = {
     "package": 20,
     "name": "neural-avalanche-utac",
     "class": "NeuralAvalancheUTAC",
@@ -51,7 +55,7 @@ PACKAGE_REGISTRY_ENTRY: dict = {
 }
 
 # ── CREP spectrum context (all GenesisAeon packages) ──────────────────────────
-CREP_SPECTRUM: dict = {
+CREP_SPECTRUM: dict[str, float] = {
     "solar_flare_P21":      0.014,
     "cygnus_x1_jet_P17":    0.046,
     "amazon_forest_P19":    0.116,

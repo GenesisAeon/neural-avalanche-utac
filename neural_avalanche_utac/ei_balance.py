@@ -10,6 +10,8 @@ Away from balance: Γ_effective < Γ_CREP (reduced criticality)
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 
 
@@ -32,9 +34,9 @@ class EIBalanceMonitor:
     ) -> None:
         self.w0_critical = w0_critical
         self.w0_scale = w0_scale
-        self._history: list[dict] = []
+        self._history: list[dict[str, Any]] = []
 
-    def compute_balance(self, w_E: float, w_I: float) -> dict:
+    def compute_balance(self, w_E: float, w_I: float) -> dict[str, Any]:
         """
         Compute E-I balance metrics.
 
@@ -68,7 +70,7 @@ class EIBalanceMonitor:
         self,
         spikes_E: np.ndarray,
         spikes_I: np.ndarray,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """
         Estimate E-I balance from excitatory and inhibitory spike train arrays.
 
@@ -81,7 +83,7 @@ class EIBalanceMonitor:
         w_I = rate_I / total
         return self.compute_balance(w_E, w_I)
 
-    def from_branching_ratio(self, sigma_b: float) -> dict:
+    def from_branching_ratio(self, sigma_b: float) -> dict[str, Any]:
         """
         Map branching ratio to E-I balance proxy.
 
@@ -95,5 +97,5 @@ class EIBalanceMonitor:
         return self.compute_balance(float(np.clip(w_E, 0, 1)), float(np.clip(w_I, 0, 1)))
 
     @property
-    def history(self) -> list[dict]:
+    def history(self) -> list[dict[str, Any]]:
         return list(self._history)

@@ -6,6 +6,8 @@ each NEURAL_TARGETS entry. Returns a structured pass/fail report.
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 
 from neural_avalanche_utac.avalanche import AvalancheDetector
@@ -25,7 +27,7 @@ def _gen_critical(seed: int = 42, n_neurons: int = 300, duration_s: float = 300.
         branching_ratio=1.0,
         seed=seed,
     )
-    return SpikeTrainGenerator(cfg).generate()["spikes"]
+    return np.asarray(SpikeTrainGenerator(cfg).generate()["spikes"])
 
 
 def run_benchmarks(
@@ -33,7 +35,7 @@ def run_benchmarks(
     verbose: bool = True,
     n_neurons: int = 300,
     duration_s: float = 300.0,
-) -> dict:
+) -> dict[str, Any]:
     """
     Run all benchmark validations for Package 20.
 
@@ -49,7 +51,7 @@ def run_benchmarks(
     dict mapping benchmark name → {measured, target, tolerance, pass}
     """
     spikes = _gen_critical(seed=seed, n_neurons=n_neurons, duration_s=duration_s)
-    results: dict = {}
+    results: dict[str, Any] = {}
 
     # ── Benchmark 1: branching ratio ──────────────────────────────────────────
     est = BranchingRatioEstimator()
@@ -133,7 +135,7 @@ def run_benchmarks(
     return results
 
 
-def _print_report(results: dict) -> None:
+def _print_report(results: dict[str, Any]) -> None:
     summary = results.get("_summary", {})
     print("\n╔══════════════════════════════════════════════════════════════╗")
     print("║  NeuralAvalancheUTAC — Benchmark Report  (GenesisAeon P20)  ║")
