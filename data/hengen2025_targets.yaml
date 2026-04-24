@@ -1,0 +1,85 @@
+# Benchmark targets for neural-avalanche-utac (Package 20)
+# Sources: Hengen & Shew (2025) Neuron 113(16), Phys Rev Lett 134 028401 (2025)
+
+package: 20
+name: neural-avalanche-utac
+version: 0.1.0
+
+references:
+  - doi: 10.1016/j.neuron.2025.05.020
+    title: "Is criticality a unified setpoint of brain function?"
+    authors: [Hengen, K.B., Shew, W.L.]
+    journal: Neuron
+    year: 2025
+  - doi: 10.1103/PhysRevLett.134.028401
+    title: "Critical Avalanches in E-I Balanced Networks"
+    journal: Physical Review Letters
+    year: 2025
+  - doi: 10.3389/fncom.2025.1560691
+    title: "Network structure influences self-organized criticality in neural networks with dynamical synapses"
+    journal: Frontiers in Computational Neuroscience
+    year: 2025
+
+utac_mapping:
+  H_t: "network branching ratio sigma_b in [0, 2]"
+  K: 2.0
+  H_star: 1.0
+  r: 0.15       # homeostatic plasticity rate per hour (Hengen lab, rat V1)
+  sigma_crep: 2.2
+  Gamma_brain: 0.2497   # arctanh(0.5) / 2.2
+
+benchmark_targets:
+  branching_ratio_critical:
+    value: 1.0
+    tolerance_fractional: 0.05
+    unit: "dimensionless"
+    source: "Harris 1963; Beggs & Plenz 2003"
+
+  power_law_tau:
+    value: 1.5
+    tolerance_absolute: 0.05
+    unit: "dimensionless"
+    description: "Avalanche size exponent P(S) ~ S^(-tau); mean-field: tau=3/2"
+    source: "Zapperi et al. 1995; Beggs & Plenz 2003"
+
+  power_law_alpha:
+    value: 2.0
+    tolerance_absolute: 0.05
+    unit: "dimensionless"
+    description: "Avalanche duration exponent P(D) ~ D^(-alpha); mean-field: alpha=2"
+    source: "Zapperi et al. 1995"
+
+  gamma_brain:
+    value: 0.251
+    tolerance_absolute: 0.03
+    unit: "dimensionless"
+    description: "CREP tensor Gamma at the critical setpoint; = arctanh(0.5)/2.2"
+    derivation: "H* = K * tanh(sigma * Gamma) => Gamma = arctanh(H*/K) / sigma"
+
+  gamma_universality_match:
+    description: "Gamma_brain ≈ Gamma_AMOC (Package 18) at the eta=50% setpoint"
+    gamma_amoc: 0.251
+    tolerance_absolute: 0.05
+    scientific_significance: >
+      Cross-domain CREP universality: both ocean circulation (AMOC, Package 18)
+      and neural criticality (Package 20) converge to Gamma ≈ 0.251 at the
+      eta = 50% homeostatic setpoint. This is the central prediction of the
+      GenesisAeon framework — physical domain is irrelevant; only the
+      efficiency setpoint determines Gamma.
+
+crep_spectrum_context:
+  # Gamma values across all GenesisAeon packages (cross-domain atlas)
+  solar_flare_P21: 0.014
+  cygnus_x1_jet_P17: 0.046
+  amazon_forest_P19: 0.116
+  amoc_ocean_P18: 0.251
+  neural_criticality_P20: 0.251   # THIS PACKAGE
+  btw_sandpile_P22: 0.296
+  manna_sandpile_P22: 0.376
+  era5_arctic_P01: 0.920
+
+falsifiable_prediction: >
+  UTAC predicts: any homeostatic system with eta_setpoint = 50% will converge
+  to Gamma = 0.251 under UTAC dynamics, regardless of physical domain.
+  Testable across Allen Brain Observatory recordings (mouse V1 Neuropixels)
+  and Human Connectome Project fMRI resting-state data.
