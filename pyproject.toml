@@ -1,6 +1,6 @@
 [project]
 name = "neural-avalanche-utac"
-version = "0.1.0"
+version = "1.0.0"
 description = "Brain Criticality & Neuronal Avalanche Threshold — GenesisAeon Package 20"
 readme = "README.md"
 license = { text = "MIT" }

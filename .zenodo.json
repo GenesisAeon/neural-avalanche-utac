@@ -1,6 +1,6 @@
 {
-  "title": "neural-avalanche-utac v0.1.0: UTAC Analysis of Neural Avalanche Criticality",
-  "version": "0.1.0",
+  "title": "neural-avalanche-utac — P20: Brain Criticality & Neuronal Avalanche Threshold",
+  "version": "1.0.0",
   "upload_type": "software",
   "access_right": "open",
   "language": "eng",
@@ -10,13 +10,16 @@
       "affiliation": "GenesisAeon (Independent Researcher)"
     }
   ],
-  "description": "neural-avalanche-utac v0.1.0 applies UTAC (Universal Threshold Activation Criticality) to neurophysiological data to detect criticality signatures in neural avalanche cascades. The UTAC-Logistic ODE identifies critical branching ratios and threshold transitions in LFP/spike time series consistent with brain criticality theory. CREP metrics measure coherence and emergent information integration across cortical network states. Bridges neuroscience and the GenesisAeon thermodynamic framework. Dual-licensed: GPLv3-or-later (code) + CC BY 4.0 (documentation).",
+  "description": "<p>neural-avalanche-utac applies UTAC (Universal Threshold Activation Criticality) to neurophysiological data to detect criticality signatures in neural avalanche cascades. The UTAC-Logistic ODE identifies critical branching ratios and threshold transitions in LFP/spike time series consistent with brain criticality theory. CREP metrics measure coherence and emergent information integration across cortical network states.</p><p>Part of the <strong>GenesisAeon</strong> ecosystem (P20, domain: neuroscience / cortical criticality). Within the GenesisAeon CREP Criticality Spectrum, this package's characteristic coupling value is &Gamma; &asymp; 0.251.</p><p>See <a href=\"https://github.com/GenesisAeon/neural-avalanche-utac\">github.com/GenesisAeon/neural-avalanche-utac</a> for source, documentation, and reproducibility notebooks.</p>",
   "keywords": [
     "genesis-aeon", "utac", "crep", "criticality", "self-organized-criticality",
     "mirror-machine", "fractal", "neural-avalanche", "brain-criticality",
-    "neurophysiology", "branching-process", "emergence"
+    "neurophysiology", "branching-process", "emergence", "P20"
   ],
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
+  "communities": [
+    { "identifier": "genesisaeon" }
+  ],
   "related_identifiers": [
     {
       "identifier": "https://doi.org/10.5281/zenodo.19645351",
